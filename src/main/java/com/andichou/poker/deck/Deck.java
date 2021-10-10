@@ -30,6 +30,9 @@ public class Deck {
         List<Card> deckList = Arrays.asList(deck);
         Collections.shuffle(deckList);
         deckList.toArray(deck);
-        System.out.println(Arrays.toString(deck));
+    }
+
+    public Card[] getDeck() {
+        return deck;
     }
 }
