@@ -3,7 +3,16 @@ package com.andichou.poker.card;
 public class Card implements Comparable<Card> {
 
     public enum Suit {
-        SPADES, HEARTS, CLUBS, DIAMONDS
+        SPADES('S'),
+        HEARTS('H'),
+        CLUBS('C'),
+        DIAMONDS('D');
+
+        public final Character value;
+
+        Suit(char value) {
+            this.value = value;
+        }
     }
 
     public enum Rank {
@@ -44,6 +53,6 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return rank + "" + suit;
+        return rank.value + "" + suit.value;
     }
 }
