@@ -15,10 +15,10 @@ public class CardMapping {
         put("8", Card.Rank.EIGHT);
         put("9", Card.Rank.NINE);
         put("10", Card.Rank.TEN);
-        put("11", Card.Rank.JACK);
-        put("12", Card.Rank.QUEEN);
-        put("13", Card.Rank.KING);
-        put("14", Card.Rank.ACE);
+        put("J", Card.Rank.JACK);
+        put("Q", Card.Rank.QUEEN);
+        put("K", Card.Rank.KING);
+        put("A", Card.Rank.ACE);
     }};
 
     public static final Map<Character, Card.Suit> MAP_SUIT = new HashMap<Character, Card.Suit>() {{

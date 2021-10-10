@@ -1,16 +1,18 @@
 package com.andichou.poker.card;
 
+import java.util.Objects;
+
 public class Card implements Comparable<Card> {
 
     public enum Suit {
-        SPADES('S'),
-        HEARTS('H'),
-        CLUBS('C'),
-        DIAMONDS('D');
+        SPADES(4),
+        HEARTS(3),
+        CLUBS(2),
+        DIAMONDS(1);
 
-        public final Character value;
+        public final int value;
 
-        Suit(char value) {
+        Suit(int value) {
             this.value = value;
         }
     }
@@ -35,6 +37,22 @@ public class Card implements Comparable<Card> {
         Rank(int value) {
             this.value = value;
         }
+
+        public static Rank min(Rank first, Rank second) {
+            return first.value < second.value ? first : second;
+        }
+
+        public static Rank max(Rank first, Rank second) {
+            return first.value < second.value ? second : first;
+        }
+
+        public boolean isAce(Rank rank) {
+            return rank.value.compareTo(ACE.value) == 0;
+        }
+
+        public boolean isSequence(Rank rank) {
+            return rank.value - 1 == value;
+        }
     }
 
     public final Rank rank;
@@ -46,6 +64,18 @@ public class Card implements Comparable<Card> {
         this.suit = suit;
     }
 
+    public boolean isSequence(Card card) {
+        return rank.isSequence(card.rank);
+    }
+
+    public boolean isHigher(Card card) {
+        return rank.value > card.rank.value;
+    }
+
+    public boolean isHigher(Suit playerSuit) {
+        return suit.value > playerSuit.value;
+    }
+
     @Override
     public int compareTo(Card card) {
         return rank.value.compareTo(card.rank.value);
@@ -54,5 +84,19 @@ public class Card implements Comparable<Card> {
     @Override
     public String toString() {
         return rank.value + "" + suit.value;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Card)) return false;
+        Card card = (Card) object;
+        return rank == card.rank &&
+            suit == card.suit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rank, suit);
     }
 }
